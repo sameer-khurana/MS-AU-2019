@@ -3,7 +3,7 @@ import java.util.logging.Logger;
 
 public class Exercise2b {
 	
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 //		ArrayIndexOutofBoundException
 		
