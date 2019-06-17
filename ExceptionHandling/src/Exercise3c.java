@@ -2,13 +2,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Exercise3c {
     public static void main(String[] args) {
 
         FileInputStream fileInputStream =  null;
+
+        Logger logger = Logger.getLogger("LearningLog");
+        FileHandler fileHandler;
+
+
+        try{
+            fileHandler = new FileHandler("C:\\Users\\sameer.khurana\\Downloads\\TempTxt\\LogFile.log");
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         try {
             File file = new File("C:/Users/sameer.khurana/Downloads/Accolite Training/file.txt");
@@ -18,14 +34,10 @@ public class Exercise3c {
             }
         }
         catch(FileNotFoundException e) {
-            e.printStackTrace();
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE,"FileNotFoundException in Excercise2c was thrown",e);
+            logger.log(Level.SEVERE,"FileNotFoundException in Excercise3c was thrown",e);
         }
         catch(IOException e) {
-            e.printStackTrace();
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE,"IOException in Excercise2c was thrown",e);
+            logger.log(Level.SEVERE,"IOException in Excercise3c was thrown",e);
         }
         finally {
             System.out.println("finally block");
@@ -33,10 +45,10 @@ public class Exercise3c {
                 fileInputStream.close();
             }
             catch(IOException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE,"IOException in Excercise3c was thrown",e);
             }
             catch(NullPointerException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE,"NullPointerException in Excercise3c was thrown",e);
             }
         }
 

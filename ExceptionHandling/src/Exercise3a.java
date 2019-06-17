@@ -1,6 +1,9 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Exercise3a {
     public static void main(String[] args) {
@@ -8,8 +11,17 @@ public class Exercise3a {
         // Performing division of numbers
         // Dividing by 0 produces Arithmetic Exception
 
-//		private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
+        Logger logger = Logger.getLogger("LearningLog");
+        FileHandler fileHandler;
+        try{
+            fileHandler = new FileHandler("C:\\Users\\sameer.khurana\\Downloads\\TempTxt\\LogFile.log");
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
 
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         int num1, num2;
         Scanner input = new Scanner(System.in);
@@ -26,11 +38,7 @@ public class Exercise3a {
         }
 
         catch(ArithmeticException ae) {
-            System.out.println("catch block \nStack Trace:");
-            ae.printStackTrace();
-            Logger logger = Logger.getAnonymousLogger();
-            logger.log(Level.SEVERE,"ArithmeticException in Excercise2a was thrown",ae);
-
+            logger.log(Level.SEVERE,"IOException in Excercise2c was thrown",ae);
         }
 
         finally {
